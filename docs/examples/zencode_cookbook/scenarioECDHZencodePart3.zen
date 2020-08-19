@@ -1,0 +1,17 @@
+Scenario 'ecdh': create the signature of an object
+Given I am 'Andrea'
+Given I have my 'keypair'
+Given that I have a 'string' named 'myMessage' inside 'mySecretStuff'
+Given I have a 'string array' named 'myStringArray'
+When I create the signature of 'myStringArray'
+When I rename the 'signature' to 'myStringArray.signature'
+When I create the signature of 'keypair'
+When I rename the 'signature' to 'keypair.signature'
+When I create the signature of 'myMessage'
+Then print the 'myMessage'
+Then print the 'signature'	
+Then print the 'myStringArray'
+Then print the 'myStringArray.signature'
+Then print the 'keypair'
+Then print the 'keypair.signature'
+

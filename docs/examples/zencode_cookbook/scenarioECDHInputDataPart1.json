@@ -1,12 +1,12 @@
 {
    "mySecretStuff":{
-	  "password":"123SecretPassword!" 
+	  "password":"myVerySecretPassword" 
 	},
 	
-  "secret_message": {
-    "checksum": "_OLzdMirHBiooaJIqrrFbA",
-    "header": "QSB2ZXJ5IGltcG9ydGFudCBzZWNyZXQ",
-    "iv": "JamUZPb9oV7Cre8xA9a9sft52L6ZmPMinBYCjDWIlJM",
-    "text": "evcBTfLFyTAUKeIet6Dv3y4MdRysdJVdGGyNanq64sqUQbqtfJDAaNNdlJjS-5kQAjg"
-  }
+  	"secret_message": {
+				"checksum": "7B65F+rARhq9RAkjLhdwmA==",
+				"header": "Zm9yIHlvdXIgZXllcyBvbmx5",
+				"iv": "9EHllNIm81ZxPmNpFeMR2++Dki6TORnbl9UWJ5PRn5Q=",
+				"text": "UQM/yZ5Nh4aGkJuWx1cDWBNPhNpS0A2uuDVkmeXgAZfywwzWX49fKh9Q"
+			}
 }

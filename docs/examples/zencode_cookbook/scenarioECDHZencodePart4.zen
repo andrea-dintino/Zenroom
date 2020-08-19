@@ -1,0 +1,11 @@
+	rule check version 1.0.0 
+	Scenario 'ecdh': Bob verifies the signature from Andrea
+	Given that I am known as 'Bob' 
+	Given I have a 'public key' from 'Andrea' 
+	Given I have a 'string' named 'myMessage' 
+#	Given I have a valid 'myMessage.signature'  
+	Given I have a valid 'signature'  
+	When I verify the 'myMessage' is signed by 'Andrea' 
+    Then print 'Zenroom certifies that signature is correct!' as 'string' 
+	Then print the 'myMessage' 
+	Then print the 'myMessage.signature'

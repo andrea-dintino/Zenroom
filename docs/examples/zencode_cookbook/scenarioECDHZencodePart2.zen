@@ -1,7 +1,6 @@
-# Encrypt with password
-Scenario 'ecdh': Decrypt the message with the password
-Given I have a 'secret message'
-Given I have a 'string' named 'password'
-When I decrypt the secret message with 'password'
-Then print the 'text' as 'string' in 'message'
-and print the 'header' as 'string' in 'message'
+Scenario 'ecdh': Decrypt the message with the password 
+	Given that I have a valid 'secret message' 
+	Given that I have a 'string' named 'password' inside 'mySecretStuff'
+	When I decrypt the secret message with 'password' 
+	Then print the 'text' as 'string' inside 'message' 
+	Then print the 'header' as 'string'  inside 'message' 		
