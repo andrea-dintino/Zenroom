@@ -1,0 +1,14 @@
+{
+  "secretForBob": {
+    "checksum": "Q49SkZBNcs9zc+kn6nz1fQ==",
+    "header": "U2VjcmV0IG1lc3NhZ2UgZm9yIEJvYiBhbmQgQ2FybA==",
+    "iv": "sAvJHUPxc5qFz2VEkNybPkME0wrwTJBJpKrlSnJSvcM=",
+    "text": "taV5DCTZjHBPwwzb9R9LLEraSwCafHulA/qA0kH9ib11uKeysDFpoy0AGSK92Uzn9is/Kbdj+26pNrGLdXVvdr3Mv9X6lVZqrHQpjRwX5311EIs="
+  },
+  "secretForCarl": {
+    "checksum": "FRC0t8+aJ7WzUK24uFYtQg==",
+    "header": "U2VjcmV0IG1lc3NhZ2UgZm9yIEJvYiBhbmQgQ2FybA==",
+    "iv": "/sW1XhbF+LjPGqkl0qfwtTnrPsRDAx3ugdDF7Ra1sXU=",
+    "text": "2vcZhR220i621o9sFmqQd0jb96qKu1+QFZ3w9CTIcrfiZPWkFdvtWx8ra767LGFEdAnkWze0NBUwSTZEflNVpuyNDWBZFKv0R8Z1qj43TFXjhUs="
+  }
+}

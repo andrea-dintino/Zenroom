@@ -1,0 +1,14 @@
+Rule check version 1.0.0
+Scenario 'ecdh': Alice encrypts a message for Bob
+Given that I am known as 'Alice'
+Given that I have my valid 'keypair'
+Given that I have a valid 'public key' from 'Bob'
+Given that I have a valid 'public key' from 'Carl'
+Given that I have a 'string' named 'message'
+Given that I have a 'string' named 'header'
+When I encrypt the secret message of 'message' for 'Bob'
+When I rename the 'secret message' to 'secretForBob'
+When I encrypt the secret message of 'message' for 'Carl'
+When I rename the 'secret message' to 'secretForCarl'
+Then print the 'secretForBob'
+Then print the 'secretForCarl'

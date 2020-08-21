@@ -162,58 +162,83 @@ EOF
 
 cat <<EOF > ../../docs/examples/zencode_cookbook/dictionariesBlockchain.json
 {
-   "ABC-TransactionList":{
+   "ABC-TransactionListFirstBatch":{
       "ABC-Transactions1Data":{
          "timestamp":1597573139,
          "TransactionValue":1000,
+		 "PricePerKG":2,
          "TransferredProductAmount":500
       },
       "ABC-Transactions2Data":{
          "timestamp":1597573239,
          "TransactionValue":1000,
+		 "PricePerKG":2,
          "TransferredProductAmount":500
       },
       "ABC-Transactions3Data":{
          "timestamp":1597573339,
          "TransactionValue":1000,
+		 "PricePerKG":2,
          "TransferredProductAmount":500
       },
       "ABC-Transactions4Data":{
          "timestamp":1597573439,
-         "TransactionValue":1000,
+         "TransactionValue":2000,
+		 "PricePerKG":4,
          "TransferredProductAmount":500
       },
       "ABC-Transactions5Data":{
          "timestamp":1597573539,
-         "TransactionValue":1000,
+         "TransactionValue":2000,
+		 "PricePerKG":4,
          "TransferredProductAmount":500
       },
       "ABC-Transactions6Data":{
          "timestamp":1597573639,
-         "TransactionValue":1000,
+         "TransactionValue":2000,
+		 "PricePerKG":4,
          "TransferredProductAmount":500
       }
    },
-   "ABC-TransactionSum":{
+   "ABC-TransactionListSecondBatch":{
       "ABC-Transactions1Sum":{
          "timestamp":1597573040,
          "TransactionValue":1000,
+		 "PricePerKG":2,
          "TransferredProductAmount":500
       },
       "ABC-Transactions2Sum":{
          "timestamp":1597573140,
          "TransactionValue":1000,
+		 "PricePerKG":2,
          "TransferredProductAmount":500
       },
       "ABC-Transactions3Sum":{
          "timestamp":1597573240,
+         "TransactionValue":2000,
+		 "PricePerKG":4,
+         "TransferredProductAmount":500
+      },
+	  "ABC-Transactions3Sum":{
+         "timestamp":1597573340,
          "TransactionValue":1000,
+		 "PricePerKG":2,
+         "TransferredProductAmount":500
+      },
+	  "ABC-Transactions3Sum":{
+         "timestamp":1597573440,
+         "TransactionValue":2000,
+		 "PricePerKG":4,
          "TransferredProductAmount":500
       }
    },
-   "timestamp":1597574000
+   "timestamp":1597573330
 }
 EOF
+
+# old value: "timestamp":1597574000
+
+
 
 let n=n+1
 
@@ -233,23 +258,23 @@ Given that I am known as 'Authority'
 and I have my 'keypair'
 
 # import the blockchain data
-Given I have a 'string dictionary' named 'ABC-TransactionSum'
-and I have a 'string dictionary' named 'ABC-TransactionList'
+Given I have a 'string dictionary' named 'ABC-TransactionListSecondBatch'
+and I have a 'string dictionary' named 'ABC-TransactionListFirstBatch'
 and I have a 'number' named 'timestamp'
 
 # find the last (most recent) sum
-When I find the max value 'timestamp' for dictionaries in 'ABC-TransactionSum'
+When I find the max value 'timestamp' for dictionaries in 'ABC-TransactionListSecondBatch'
 and rename the 'max value' to 'last sum'
 
 # compute the total values of recent transactions not included in last sum
-and create the sum value 'TransactionValue' for dictionaries in 'ABC-TransactionList' where 'timestamp' > 'last sum'
+and create the sum value 'TransactionValue' for dictionaries in 'ABC-TransactionListFirstBatch' where 'timestamp' > 'last sum'
 and rename the 'sum value' to 'TotalTransactionsValue'
-and create the sum value 'TransferredProductAmount' for dictionaries in 'ABC-TransactionList' where 'timestamp' > 'last sum'
+and create the sum value 'TransferredProductAmount' for dictionaries in 'ABC-TransactionListFirstBatch' where 'timestamp' > 'last sum'
 and rename the 'sum value' to 'TotalTransferredProductAmount'
 
 # retrieve the values in last sum
-When I find the 'TransactionValue' for dictionaries in 'ABC-TransactionSum' where 'timestamp' = 'last sum'
-and I find the 'TransferredProductAmount' for dictionaries in 'ABC-TransactionSum' where 'timestamp' = 'last sum'
+When I find the 'TransactionValue' for dictionaries in 'ABC-TransactionListSecondBatch' where 'timestamp' = 'last sum'
+and I find the 'TransferredProductAmount' for dictionaries in 'ABC-TransactionListSecondBatch' where 'timestamp' = 'last sum'
 
 # sum the last with the new aggregated values from recent transactions
 and I create the sum of 'TotalTransactionsValue' and 'TransactionValue'
@@ -272,3 +297,4 @@ and I rename the 'signature' to 'New-ABC-TransactionsSum.signature'
 Then print the 'New-ABC-TransactionsSum'
 and print the 'New-ABC-TransactionsSum.signature'
 EOF
+

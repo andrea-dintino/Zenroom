@@ -4,21 +4,21 @@
     "public_key": "BBCQg21VcjsmfTmNsg+I+8m1Cm0neaYONTqRnXUjsJLPa8075IYH+a9w2wRO7rFM1cKmv19Igd7ntDZcUvLq3xI="
   },
   "keypair.signature": {
-    "r": "i3ETJburLBqXpvIaLWECkoDviqXugtZgSGdC2jtdsxU=",
-    "s": "2+UeKM1t5qT3DRSveGUidgVdqvk6VW18NwQuN9GImzw="
+    "r": "aJit2usfOpqCopekWVBllH8+DNCwbyaDHiEl7ePuQgw=",
+    "s": "p8ZZV2WjGqA1L2EpuWjvbj7B2Yde9Q5EKlYCnGNuX8w="
   },
   "myMessage": "Dear Bob, your name is too short, goodbye - Alice.",
+  "myMessage.signature": {
+    "r": "lqu77vrc0xg/Ho+GH4SONwr9/2HJSBl3QpMPHxuP61o=",
+    "s": "425b7ZiNYNrKydJ9xti8mjcqqy52NvE2fuAyKsNPtPg="
+  },
   "myStringArray": [
     "Hello World! This is my string array, element [0]",
     "Hello World! This is my string array, element [1]",
     "Hello World! This is my string array, element [2]"
   ],
   "myStringArray.signature": {
-    "r": "SECtS6psT421x8ChKI2GyVr//BG4Wj1R+1hYotsjg+w=",
-    "s": "c9ARNhpTJgbGOoLYmw07sVhZMXdPqhmOcBVGT/L7k8o="
-  },
-  "signature": {
-    "r": "ZOChy4ZhQQDWNswtI/LJMwbOjebvcXnGU/yRsBudHf8=",
-    "s": "L/ncm6jS/y0YWhc02nDeHRcJ8j8i38zyVndxsoLq+Sw="
+    "r": "3D3AUxGdGGuJIu5PFov9l0GK0nrxdjhF6mBmioM9yk4=",
+    "s": "9aXgNuBMk6ZfdhVMYKVwOGPqdy0sDFTVlgCuvuwzcb8="
   }
 }
