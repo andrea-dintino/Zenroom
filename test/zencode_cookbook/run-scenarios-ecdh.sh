@@ -215,22 +215,19 @@ echo "                                                "
 cat <<EOF  > $tmpData3
 {
    "mySecretStuff":{
-	  "myMessage": "Dear Bob, your name is too short, goodbye - Alice.",   
+	  "myMessage": "Dear Bob, your name is too short, goodbye - Alice." 
 	},
 	 "myStringArray":[
 		 "Hello World! This is my string array, element [0]",
 		 "Hello World! This is my string array, element [1]",
 		 "Hello World! This is my string array, element [2]"
       ],
-  "Alice": {
-    "keypair": {
-      "private_key": "Aku7vkJ7K01gQehKELav3qaQfTeTMZKgK+5VhaR3Ui0=",
+	  "Alice": {
+		"keypair": {
+		  "private_key": "Aku7vkJ7K01gQehKELav3qaQfTeTMZKgK+5VhaR3Ui0=",
       "public_key": "BBCQg21VcjsmfTmNsg+I+8m1Cm0neaYONTqRnXUjsJLPa8075IYH+a9w2wRO7rFM1cKmv19Igd7ntDZcUvLq3xI="
     }
   }
-  
-	
-
 }
 EOF
 cat $tmpData3 > ../../docs/examples/zencode_cookbook/scenarioECDHInputDataPart2.json
@@ -239,22 +236,24 @@ cat $tmpData3 > ../../docs/examples/zencode_cookbook/scenarioECDHInputDataPart2.
 
 cat <<EOF  > $tmpZencode3
 Scenario 'ecdh': create the signature of an object
+
+# Declaring who I am and loading all the stuff
 Given I am 'Alice'
 Given I have my 'keypair'
 Given that I have a 'string' named 'myMessage' inside 'mySecretStuff'
 Given I have a 'string array' named 'myStringArray'
+
+# Here we create the signaturs and we rename them to samething that looks nicer
 When I create the signature of 'myStringArray'
 When I rename the 'signature' to 'myStringArray.signature'
-When I create the signature of 'keypair'
-When I rename the 'signature' to 'keypair.signature'
 When I create the signature of 'myMessage'
 When I rename the 'signature' to 'myMessage.signature'
+
+# Here we print both the messages and the signatures
 Then print the 'myMessage'
 Then print the 'myMessage.signature'	
 Then print the 'myStringArray'
 Then print the 'myStringArray.signature'
-Then print the 'keypair'
-Then print the 'keypair.signature'
 
 EOF
 
@@ -303,16 +302,22 @@ cat $tmpData4 > ../../docs/examples/zencode_cookbook/scenarioECDHAlicePublicKey.
 cat <<EOF  > $tmpZencode4
 rule check version 1.0.0 
 Scenario 'ecdh': Bob verifies the signature from Alice
+
+# Declaring who I am and loading all the stuff
 Given that I am known as 'Bob' 
 Given I have a 'public key' from 'Alice' 
 Given I have a 'string' named 'myMessage' 
 Given I have a 'signature' named 'myMessage.signature'
 Given I have a 'string array' named 'myStringArray'
 Given I have a 'signature' named  'myStringArray.signature'
+
+# The verification happens here: if the verification would fails, Zenroom would stop and print an error 
 When I verify the 'myMessage' has a signature in 'myMessage.signature' by 'Alice'
 When I verify the 'myStringArray' has a signature in 'myStringArray.signature' by 'Alice'	
-Then print 'Zenroom certifies that signatures are all correct!' as 'string' 
-Then print the 'myMessage' 
+
+# Here we're printing the original message along with happy statement of success
+Then print the 'myMessage'
+Then print 'Zenroom certifies that signatures are all correct!' as 'string'
 EOF
 
 

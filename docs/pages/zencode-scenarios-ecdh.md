@@ -36,7 +36,7 @@ The result should look like this
 
 
 
-## Encrypting a secret message with a password
+## Encrypt with password
 
 The *secret message* is also a ***schema*** in Zenroom, it comprises a string named **header** and a second string containing the message that can have any name. 
 
@@ -60,7 +60,7 @@ The result should look like this:
 If you later want to decrypt this, you may want to save it into a file that we'll name *scenarioECDHPart1.json*.
 
 
-## Decrypting a secret message with a password
+### Decrypt with password
 
 Decryption does normally come after the encryption, so following script allows you to decrypt the encrypted **secret message** you generated above. So you can pass the file *scenarioECDHPart1.json* (the output from the previous script) to Zenroom using the *-a*, along with password alone using the *-k* parameter:
 
@@ -76,7 +76,7 @@ The result should look like this:
 [](../_media/examples/zencode_cookbook/scenarioECDHPart2.json ':include :type=code json')
 
 
-## Encrypting a secret message with a public key
+## Encrypt a message with a public key
 
 Here we'll encrypt a **secret message** using a public key, more precisely we'll encrypt it for two different recipients who have two different keypairs.
 Keep in mind that you can in fact encrypt the same message for as many recipient as you like, just follow the structure of the script and extend it as you like.
@@ -102,7 +102,7 @@ What we see here are two **secret messages**, next to each other, each encoded f
 You can feed this output in the next script to decrypt decrypt it, so you may want to save it into a file that we'll name *scenarioECDHPart5.json*.
 
 
-## Decrypting a secret message, encrypted with a public key, using a keypair 
+### Decrypt a message, encrypted with a public key 
 
 Here we'll learn how to decrypt the message encrypted in the previous script. Keep in mind that the typical use case for this consists in a single user decrypting the message. Therefore, we are able to load one keypair only per script. 
 
@@ -119,7 +119,7 @@ The result should look like this:
 
 [](../_media/examples/zencode_cookbook/scenarioECDHPart6.json ':include :type=code json')
 
-## Encrypting a JSON with a public key
+## Encrypt a JSON with a public key
 
 What if you want to encrypt a more complex data structure? Zenroom can handle that too, provided that you feed the data in a way it can process it, for example in ***base64***. 
 
@@ -165,7 +165,7 @@ Again we two encrypted objects, next to each other, each encoded for one recipie
 You can feed this output in the next script to decrypt decrypt it, so you may want to save it into a file that we'll name *scenarioECDHJSONOutputbase64.json*.
 
 
-## Decrypting a JSON, encrypted with a public key, using a keypair 
+### Decrypt a JSON, encrypted with a public key 
 
 So here we'll learn how to decrypt the message encrypted in the previous script. Again that the typical use case for this consists in a single user decrypting the message. Therefore, we are able to load one keypair only per script. 
 
@@ -196,5 +196,42 @@ This script should produce a file named *scenarioECDHJSONdecryptedOutput.json* w
 
 
 ## Create the signature of an object
+
+If you need to transfer some data, where the information itself is readable by everybody, but the readers need to be able to verify that you have written the data yourself, then creating an ECDH signature is what you need.
+
+In this example we'll sign two objects: a ***string*** and a ***string array***, that we'll verify in the next script. Along with the data to be signed, we'll need a **keypair**, and for a change we'll load all of this from single file, that you can pass to Zenroom both as *-a* or as *-k* (in fact there is no difference between the two paramenters), and we'll name *scenarioECDHInputDataPart2.json*:
+
+
+[](../_media/examples/zencode_cookbook/scenarioECDHInputDataPart2.json ':include :type=code json')
+
+
+A script to sign two objects looks like:
+
+[](../_media/examples/zencode_cookbook/scenarioECDHZencodePart3.zen ':include :type=code gherkin')
+
+
+The output should be a JSON file named *scenarioECDHPart3.json*, that we can feed to Zenroom (using the parameter *-a*) and should look like this: 
+
+[](../_media/examples/zencode_cookbook/scenarioECDHPart3.json ':include :type=code json')
+
+
+
+### Verify the signature of an object
+
+Here we'll learn how to verify the ECDH signatures produced in the previous script. The typical use case for this consists in a single user verifying the signature so again we are able to load one keypair only per script. 
+
+So first we'll load the file *scenarioECDHPart3.json* (the output of the previous script) using the *-a* parameter, and then we'll need a keypair (Bob's in this case, but it could be anyone's keypair) along with Alice's public key, to verify the message:
+
+
+[](../_media/examples/zencode_cookbook/scenarioECDHPart3.json ':include :type=code json')
+
+A basic script to verify an ECDH signature looks like:
+
+[](../_media/examples/zencode_cookbook/scenarioECDHZencodePart4.zen ':include :type=code gherkin')
+
+The result should look like this:
+
+[](../_media/examples/zencode_cookbook/scenarioECDHPart4.json ':include :type=code json')
+
 
 ### 
