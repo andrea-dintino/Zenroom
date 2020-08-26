@@ -1,6 +1,0 @@
-rule check version 1.0.0
-Given nothing
-When I write number '3' in 'left'
-and I write number '6' in 'right'
-when I create the sum of 'left' and 'right'
-Then print all data
