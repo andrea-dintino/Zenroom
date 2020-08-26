@@ -1,12 +1,5 @@
 {
    "mySecretStuff":{
 	  "password":"myVerySecretPassword" 
-	},
-	
-  	"secret_message": {
-				"checksum": "7B65F+rARhq9RAkjLhdwmA==",
-				"header": "Zm9yIHlvdXIgZXllcyBvbmx5",
-				"iv": "9EHllNIm81ZxPmNpFeMR2++Dki6TORnbl9UWJ5PRn5Q=",
-				"text": "UQM/yZ5Nh4aGkJuWx1cDWBNPhNpS0A2uuDVkmeXgAZfywwzWX49fKh9Q"
-			}
+	}
 }

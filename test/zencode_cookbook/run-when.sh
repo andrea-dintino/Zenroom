@@ -216,6 +216,11 @@ When I randomize the 'myFourthArray' array
 When I write number '10' in 'nameOfFirstNewVariable'
 When I write string 'This is my lovely new string!' in 'nameOfSecondNewVariable'
 
+# SUM
+# You can sum two numbers, their sum would end up in a newly created variable named "sum"
+and I create the sum of 'myFirstNumber' and 'mySecondNumber'
+and I rename the 'sum' to 'sumOfFirstAndSecondNumber'
+
 # PICK RANDOM
 # The "pick a random object in" picks randomly an object from the target array
 # and puts into a newly created object named "random_object".
@@ -305,6 +310,7 @@ and I rename the 'array' to 'my16RandomNumbersModulo1000Array'
 When I set 'myNewlyCreatedString' to 'call me The Pink Panther!' as 'string'
 When I set 'myNewlyFirstCreatedNumber' to '42' as 'number'
 When I set 'myNewlySecondCreatedNumber' to '42' base '16'
+
 Then print all data
 EOF
 

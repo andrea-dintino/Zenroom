@@ -4,17 +4,19 @@
   - [Zenroom CLI](/pages/how-to-exec.md "Execute") 
 <!--- to remove https://github.com/DECODEproject/Zenroom/blob/master/docs/website/docs/encrypt.md  ---> 
 
-- Programming Zencode
+- Zencode Basics
   - [What is Zencode?](/pages/zencode-intro.md "Zencode cookbook intro")
   - [Quickstart](/pages/zencode-cookbook-intro.md "Zencode Quickstart") 
-  - [Zencode: Given](/pages/zencode-cookbook-given.md "Zencode cookbook Given")
-  - [Zencode: When](/pages/zencode-cookbook-when.md "Zencode cookbook When")
-  - [Zencode: Then](/pages/zencode-cookbook-then.md "Zencode cookbook Then")
-  - [Zencode "Rules"](/pages/zencode-rules.md "Zencode encoding and format rules")
-  - [Config parameters](/pages/zenroom-config.md "Zenroom config")
-  - [Cryptography in Zencode](/pages/zencode-crypto.md "Zencode")
+  - [Zencode: "Given" phase](/pages/zencode-cookbook-given.md "Zencode cookbook Given")
+  - [Zencode: "When phase](/pages/zencode-cookbook-when.md "Zencode cookbook When")
+  - [Zencode: "Then" phase](/pages/zencode-cookbook-then.md "Zencode cookbook Then")
+  - [Zencode "rules"](/pages/zencode-rules.md "Zencode encoding and format rules")
+  - [Zencode "config"](/pages/zenroom-config.md "Zenroom config")
   - [Zencode command list](/pages/zencode-list.md "Zencode command list")
 
+- Zencode Advanced 
+  - [Cryptography](/pages/zencode-crypto.md "Zencode")
+  - [Scenario ecdh: encryption, signature](/pages/zencode-scenarios-ecdh "Zencode")
 
 
 - Programming Lua

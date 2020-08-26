@@ -11,6 +11,6 @@
 	"Carl": {
 		"public_key": "BLdpLbIcpV5oQ3WWKFDmOQ/zZqTo93cT1SId8HNITgDzFeI6Y3FCBTxsKHeyY1GAbHzABsOf1Zo61FRQFLRAsc8="
 	},
-	"message": "Dear Bob and Carl, if you are reading this, then we're not friend anymore. Goodbye.",
+	"myMessageForBobAndCarl": "Dear Bob and Carl, if you are reading this, then we're not friend anymore. Goodbye.",
 	"header": "Secret message for Bob and Carl"
 }

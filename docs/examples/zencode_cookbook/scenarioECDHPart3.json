@@ -4,13 +4,13 @@
     "public_key": "BBCQg21VcjsmfTmNsg+I+8m1Cm0neaYONTqRnXUjsJLPa8075IYH+a9w2wRO7rFM1cKmv19Igd7ntDZcUvLq3xI="
   },
   "keypair.signature": {
-    "r": "aJit2usfOpqCopekWVBllH8+DNCwbyaDHiEl7ePuQgw=",
-    "s": "p8ZZV2WjGqA1L2EpuWjvbj7B2Yde9Q5EKlYCnGNuX8w="
+    "r": "kVqOUuhQAkpCEGpXXQOTl4KUtHsEp0vHJ0f5VCiipKA=",
+    "s": "IHD9BYDQi6XozDhyeZxjCNOVSsoqWCcCE8mJP+tce3Y="
   },
   "myMessage": "Dear Bob, your name is too short, goodbye - Alice.",
   "myMessage.signature": {
-    "r": "lqu77vrc0xg/Ho+GH4SONwr9/2HJSBl3QpMPHxuP61o=",
-    "s": "425b7ZiNYNrKydJ9xti8mjcqqy52NvE2fuAyKsNPtPg="
+    "r": "lLA/qXMu7dXCIEVjmQHIGkhtvauWC+mO7bZHM5KpUfA=",
+    "s": "hdM50+oq77pAJf/oJklEzFXC++jwFiJ1BF+9ELS+zVw="
   },
   "myStringArray": [
     "Hello World! This is my string array, element [0]",
@@ -18,7 +18,7 @@
     "Hello World! This is my string array, element [2]"
   ],
   "myStringArray.signature": {
-    "r": "3D3AUxGdGGuJIu5PFov9l0GK0nrxdjhF6mBmioM9yk4=",
-    "s": "9aXgNuBMk6ZfdhVMYKVwOGPqdy0sDFTVlgCuvuwzcb8="
+    "r": "IVnghkaBWQhyviCmYX66mFZscOmIimerjo4IYEPpwBk=",
+    "s": "xPae0S29mPEWg8ooQ+gGwtqVBmVRhPak6+w89sIQEPg="
   }
 }

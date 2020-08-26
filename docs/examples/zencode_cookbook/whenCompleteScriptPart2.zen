@@ -39,4 +39,5 @@ and I rename the 'array' to 'my16RandomNumbersModulo1000Array'
 When I set 'myNewlyCreatedString' to 'call me The Pink Panther!' as 'string'
 When I set 'myNewlyFirstCreatedNumber' to '42' as 'number'
 When I set 'myNewlySecondCreatedNumber' to '42' base '16'
+
 Then print all data

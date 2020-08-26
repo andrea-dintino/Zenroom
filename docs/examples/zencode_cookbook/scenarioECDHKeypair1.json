@@ -1,8 +1,8 @@
 {
-  "Andrea": {
+  "Alice": {
     "keypair": {
-      "private_key": "cV03UH1l+JUz5dbXs7+GhWtFWIf+o6axXz8S8CxwUFs=",
-      "public_key": "BMuJsvPYODwP0EuaXMkTluLHKElcmUQytwnkilrlCLz/QoFuilO7qNprXC3+ks0dkkJucsUUcIzIRA9dkTNWY2E="
+      "private_key": "GdFa6Bs3BvYC5a8gRAVsmHHfse7+OY2MTDSsNyiYYbQ=",
+      "public_key": "BExAaJaE28b38IJDPvXLVrJWcPp08iDxDBZE4Ghd5259qjVRUqyvcQFeKhj7kcHXdfjhJZyPduwic/XWAR9OpX0="
     }
   }
 }
