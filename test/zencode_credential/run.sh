@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# output path: ../../docs/examples/zencode_cookbook/
+
 
 ####################
 # common script init
@@ -11,14 +13,14 @@ Z="`detect_zenroom_path` `detect_zenroom_conf`"
 
 # credential request
 
-cat << EOF | zexe credential_keygen.zen | tee keypair.keys
+cat << EOF | zexe ../../docs/examples/zencode_cookbook/credentialParticipantKeygen.zen | tee ../../docs/examples/zencode_cookbook/credentiaParticipantKeypair.json
 Scenario credential: credential keygen
     Given that I am known as 'Alice'
     When I create the credential keypair
     Then print my 'credential keypair'
 EOF
 
-cat << EOF | zexe create_request.zen -k keypair.keys | tee request.json
+cat << EOF | zexe ../../docs/examples/zencode_cookbook/credentialParticipantSignatureRequest.zen -k ../../docs/examples/zencode_cookbook/credentiaParticipantKeypair.json | tee ../../docs/examples/zencode_cookbook/credentiaParticipantSignatureRequest.json
 Scenario credential: create request
     Given that I am known as 'Alice'
     and I have my valid 'credential keypair'
@@ -28,14 +30,14 @@ EOF
 
 # credential issuance
 
-cat << EOF | zexe issuer_keygen.zen | tee issuer_keypair.keys
+cat << EOF | zexe ../../docs/examples/zencode_cookbook/credentiaIssuerKeygen.zen | tee ../../docs/examples/zencode_cookbook/credentiaIssuerKeypair.json
 Scenario credential: issuer keygen
     Given that I am known as 'MadHatter'
     When I create the issuer keypair
     Then print my 'issuer keypair'
 EOF
 
-cat << EOF | zexe publish_verifier.zen -k issuer_keypair.keys | tee verifier.json
+cat << EOF | zexe ../../docs/examples/zencode_cookbook/credentiaIssuerPublishVerifier.zen -k ../../docs/examples/zencode_cookbook/credentiaIssuerKeypair.json | tee ../../docs/examples/zencode_cookbook/credentiaIssuerVerifier.json
 Scenario credential: publish verifier
     Given that I am known as 'MadHatter'
     and I have my valid 'issuer keypair'
@@ -44,7 +46,7 @@ EOF
 
 # credential signature
 
-cat << EOF | zexe issuer_sign.zen -a request.json -k issuer_keypair.keys | tee signature.json
+cat << EOF | zexe ../../docs/examples/zencode_cookbook/credentiaIssuerSignRequest.zen -a ../../docs/examples/zencode_cookbook/credentiaParticipantSignatureRequest.json -k ../../docs/examples/zencode_cookbook/credentiaIssuerKeypair.json | tee ../../docs/examples/zencode_cookbook/credentiaIssuerSignedCredential.json
 Scenario credential: issuer sign
     Given that I am known as 'MadHatter'
     and I have my valid 'issuer keypair'
@@ -54,7 +56,7 @@ Scenario credential: issuer sign
     and print the 'verifier'
 EOF
 
-cat << EOF | zexe aggregate_signature.zen -a signature.json -k keypair.keys | tee credentials.json
+cat << EOF | zexe ../../docs/examples/zencode_cookbook/credentialParticipantAggregateCredential.zen -a ../../docs/examples/zencode_cookbook/credentiaIssuerSignedCredential.json -k ../../docs/examples/zencode_cookbook/credentiaParticipantKeypair.json | tee ../../docs/examples/zencode_cookbook/credenParticipantAggregatedCredential.json
 Scenario credential: aggregate signature
     Given that I am known as 'Alice'
     and I have my valid 'credential keypair'
@@ -66,7 +68,7 @@ EOF
 
 # zero-knowledge credential proof emission and verification
 
-cat << EOF | zexe create_proof.zen -k credentials.json -a verifier.json | tee proof.json
+cat << EOF | zexe ../../docs/examples/zencode_cookbook/credentialParticipantCreateProof.zen -k ../../docs/examples/zencode_cookbook/credenParticipantAggregatedCredential.json -a ../../docs/examples/zencode_cookbook/credentiaIssuerVerifier.json | tee ../../docs/examples/zencode_cookbook/credentialParticipantProof.json
 Scenario credential: create proof
     Given that I am known as 'Alice'
     and I have my valid 'credential keypair'
@@ -78,7 +80,7 @@ Scenario credential: create proof
 EOF
 
 
-cat << EOF | zexe verify_proof.zen -k proof.json -a verifier.json
+cat << EOF | zexe ../../docs/examples/zencode_cookbook/credentialAnyoneVerifyProof.zen -k ../../docs/examples/zencode_cookbook/credentialParticipantProof.json -a ../../docs/examples/zencode_cookbook/credentiaIssuerVerifier.json
 Scenario credential: verify proof
     Given that I have a valid 'verifier' inside 'MadHatter'
     and I have a valid 'credential proof'
