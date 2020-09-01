@@ -173,6 +173,15 @@ echo "                                                "
 
 
 cat <<EOF  > $tmpWhen1
+# SUM, SUBTRACTION
+# You can use the statement 'When I create the result of ... " to 
+# sum or subtract values, see the examples below. The output of the 
+# statement will be an object named "result" that we immediately rename.
+When I create the result of 'mySecondNumber' + 'myThirdNumber'
+and I rename the 'result' to 'resultOfmyFirstSum'
+When I create the result of 'mySecondNumber' - 'myThirdNumber'
+and I rename the 'result' to 'resultOfmyFirstSubtraction'
+
 # APPEND
 # The "append" statement are pretty self-explaining: 
 # append a simple object of any encoding to another one
@@ -209,17 +218,12 @@ And I rename the 'rightmost' to 'myThirdStringRightmost'
 # The "randomize" statements takes the name of an array as input and shuffles it. 
 When I randomize the 'myFourthArray' array
 
-# WRITE IN
+# WRITE IN (create string or number)
 # the "write in" statement create a new object, assigns it an encoding but 
 # only "number" or "string" (if you need any other encoding, 
 # use the "set as" statement) and assigns it the value you define.
 When I write number '10' in 'nameOfFirstNewVariable'
 When I write string 'This is my lovely new string!' in 'nameOfSecondNewVariable'
-
-# SUM
-# You can sum two numbers, their sum would end up in a newly created variable named "sum"
-and I create the sum of 'myFirstNumber' and 'mySecondNumber'
-and I rename the 'sum' to 'sumOfFirstAndSecondNumber'
 
 # PICK RANDOM
 # The "pick a random object in" picks randomly an object from the target array
@@ -308,8 +312,9 @@ and I rename the 'array' to 'my16RandomNumbersModulo1000Array'
 # containing numbers in different bases. 
 # When working with strings, remember that spaces are converted to underscores.
 When I set 'myNewlyCreatedString' to 'call me The Pink Panther!' as 'string'
-When I set 'myNewlyFirstCreatedNumber' to '42' as 'number'
-When I set 'myNewlySecondCreatedNumber' to '42' base '16'
+When I set 'myNewlyCreatedBase64' to 'SGVsbG8gV29ybGQh' as 'base64'
+When I set 'myNewlytCreatedNumber' to '42' as 'number'
+When I set 'myNewlyCreatedNumberInBaseSomething' to '42' base '16'
 
 Then print all data
 EOF
