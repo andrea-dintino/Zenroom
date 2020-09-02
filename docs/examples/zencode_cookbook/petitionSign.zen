@@ -5,5 +5,5 @@ Scenario petition: sign petition
     and I have my 'credentials'
     and I have a valid 'verifier' inside 'MadHatter'
     When I aggregate the verifiers
-    and I create the petition signature 'poll'
+    and I create the petition signature 'More privacy for all!'
     Then print the 'petition signature'

@@ -33,17 +33,27 @@ echo "------------------------------------------------"
 echo "   											  "
 
 
-cat <<EOF | zexe ../../docs/examples/zencode_cookbook/petitionRequest.zen -k ../../docs/examples/zencode_cookbook/credentialParticipantAggregatedCredential.json -a ../../docs/examples/zencode_cookbook/credentialIssuerVerifier.json | jq . | tee ../../docs/examples/zencode_cookbook/petitionRequested.json
-Scenario credential
-Scenario petition: create
+cat <<EOF | zexe ../../docs/examples/zencode_cookbook/petitionRequest.zen -k ../../docs/examples/zencode_cookbook/credentialParticipantAggregatedCredential.json -a ../../docs/examples/zencode_cookbook/credentialIssuerVerifier.json | jq . | tee ../../docs/examples/zencode_cookbook/petitionRequest.json
+# Two scenarios are needed for this script, "credential" and "petition".
+	Scenario credential: read and validate the credentials
+	Scenario petition: create the petition
+# Here I state my identity
     Given that I am known as 'Alice'
+# Here I load everything needed to proceed
     and I have my valid 'credential keypair'
     and I have my valid 'credentials'
     and I have a valid 'verifier' inside 'MadHatter'
+# In the "when" phase we have the cryptographical creation of the petition
     When I aggregate the verifiers
     and I create the credential proof
-    and I create the petition 'poll'
-    Then print all data
+    and I create the petition 'More privacy for all!'
+# Here we are printing out what is needed to the get the petition approved
+    Then print the 'verifiers'
+	and print the 'credential proof'
+	and print the 'petition'
+# Here we're just printing the "uid" as string, instead of the default base64
+# so that it's human readable - this is not needed to advance in the flow
+	and print the 'uid' as 'string' inside 'petition' 
 EOF
 
 let n=n+1
@@ -56,7 +66,7 @@ echo "------------------------------------------------"
 echo "   											  "
 
 
-cat <<EOF | zexe ../../docs/examples/zencode_cookbook/petitionApproved.zen -k ../../docs/examples/zencode_cookbook/petitionRequested.json -a ../../docs/examples/zencode_cookbook/credentialIssuerVerifier.json | jq . | tee ../../docs/examples/zencode_cookbook/petitionApproved.json
+cat <<EOF | zexe ../../docs/examples/zencode_cookbook/petitionApprove.zen -k ../../docs/examples/zencode_cookbook/petitionRequest.json -a ../../docs/examples/zencode_cookbook/credentialIssuerVerifier.json | jq . | tee ../../docs/examples/zencode_cookbook/petitionApproved.json
 Scenario credential
 Scenario petition: approve
     Given that I have a 'verifier' inside 'MadHatter'
@@ -87,7 +97,7 @@ Scenario petition: sign petition
     and I have my 'credentials'
     and I have a valid 'verifier' inside 'MadHatter'
     When I aggregate the verifiers
-    and I create the petition signature 'poll'
+    and I create the petition signature 'More privacy for all!'
     Then print the 'petition signature'
 EOF
 

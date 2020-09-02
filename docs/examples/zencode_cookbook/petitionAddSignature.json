@@ -1,23 +1,23 @@
 {
   "petition": {
     "list": [
-      "AyExtZfXSr/FaoQvH2F7copG9UPuKqtrA3Xs8iwWcyPfWQhSwifDNjgcTGHkc+tVdw=="
+      "AxiT1yJJYEOvv6JctsjgH0pVQQK0XKkOSpXEY0DYUeoRy104Irg6a0He50jZh6Bvgg=="
     ],
-    "owner": "AkxuE0i/nx/imGIDEftEkUCuagp0408Ky22eAPh7d7E61OlVXBxiNvwhTVvM0mY/mA==",
+    "owner": "AxSggI9xzQ/RTjH2gRyFd+QHPCTqZucAihUyETUhVdJY9vohtmcGDFmEdOTHOTCeow==",
     "scores": {
       "neg": {
-        "left": "AxBieza5OkfcLz3zJ+/u9/H6cug/SmWbTFCSGk3QTFUqq3MoaIGF3GvmI3WNSHvvCw==",
-        "right": "AwtXm1U67CuTzpoZvqAyOFTbIfMOc7QL8cZUyh+7FNbU9rkWbNHj5d3rF65GVrZPBA=="
+        "left": "Akjrf/eiTv4UaqgU8ia7aijsLEDcN9G0LclXX5ubXteQYLfaetv2GF3sOHcwQCsSqQ==",
+        "right": "A0wO/cQkpj8+ILgO6JI1CKYleNY3nVdO86OKKz1NbBVNE/w1tn5rIeG16oEPMJS1aA=="
       },
       "pos": {
-        "left": "AhBieza5OkfcLz3zJ+/u9/H6cug/SmWbTFCSGk3QTFUqq3MoaIGF3GvmI3WNSHvvCw==",
-        "right": "AwDEZnVEfC/PghrK9IxNe8XTZhTFwtpjpzHSfLVVI5M/i+T7xqxH9wqSoStSySS/LA=="
+        "left": "A0jrf/eiTv4UaqgU8ia7aijsLEDcN9G0LclXX5ubXteQYLfaetv2GF3sOHcwQCsSqQ==",
+        "right": "Ak9p3CrSjY9+ZwZbK8Bi+SjBX0FWztgLHlVFwi9TcTBKCtA7kvfugiRzzGnfFCAsSQ=="
       }
     },
-    "uid": "cG9sbA=="
+    "uid": "TW9yZV9wcml2YWN5X2Zvcl9hbGwh"
   },
   "verifiers": {
-    "alpha": "QtymIC4FKQ0LMhC9HazibNlsc6fve1mKlzQBfUsu+YmGGfq9yI8/gPtstp96C8DcPXnNDrPdCUkrKWSLsl1wq9WLeD71yyfUfflXEk1ztRsTnQ59A3qBwIRmy4CHRCbgS3DSW+deJnzaJ1qMzFbGBUcrkFNKB3aNNKa7BxoZ+WlbGgTYv7taUrlLxran7T8tFxmoNv9Ku4O8BpVUZlkSr/OfgehwgOpPCrIaMLL4ub3YEqEPfpqPTM4mexActEh7",
-    "beta": "RUYE411bbTLDAvEqWO4wGfP1ud6wuig7ws+5XwUOT0lrxgclDTmDFejfdPRiGY5DMY0N2c7towKWmJ3A9luaV/2Dqpo7OEmHnaaXUhpPRWBxbmRa7Cb/aZka8OiR8rV6EiHLPohhv3awUEijJg2Y8C0WuX8s0SBvhXTLhSxSbvEjXdEQaKOS8k7IJmqTBYiQS55Pbqsv5YV49PU62kSsviB522+d4G82GxE0lPz2NcByAr6VFnxeB/nuTDXq8fMu"
+    "alpha": "P/0EVN5KUGszzll5GlO9yI3p1p80BaWp5UdJ/R4rrRYyxcBg93F3KKOEYJtrsJ4SBlxbo59jeWEi2WBRnBwClNI4YOD3ak2llLNp7y6NN3FbSKF6ZI1aoeD22rp/SUTTQVfT6vMtzXDHaE8KEWBnN87Gb5unt6tDj1kVhbE9scTV5G62ZpJBBB3aUTbQsDtCGWQlBWb0jImIaJ3ZndChwzUVy2DBnRC5nqVDzH8BJ5AtPO46qwo8M4EQ7dLPCv1h",
+    "beta": "DxkhJCeC0LmNix2Q9XZxmHKwBv6fbYymNH6PGdvnOU6uD3NhZBbp+jA27kPon1CACigQ4IT/TpUGJwoy3M0o7l2x+mxPS6akE26kMrYARNC3fbYk6N9ugbjki8WX6uPQFheJJ1ZfSiiUQ02MFmIPTDKa0bRjXTyHak41+2SbQpPU1BYreIlIrDmzP8XrEaz0H0287Mg85L/iAXdtSpOk5qRyXm+lGa6QldyYkQ22xmNN6Ch0mIb3Ds9/e8EN1bM0"
   }
 }
