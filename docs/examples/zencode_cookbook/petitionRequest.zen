@@ -1,0 +1,10 @@
+Scenario credential
+Scenario petition: create
+    Given that I am known as 'Alice'
+    and I have my valid 'credential keypair'
+    and I have my valid 'credentials'
+    and I have a valid 'verifier' inside 'MadHatter'
+    When I aggregate the verifiers
+    and I create the credential proof
+    and I create the petition 'poll'
+    Then print all data

@@ -1,15 +1,39 @@
 #!/usr/bin/env bash
 
+# output path:  ../../docs/examples/zencode_cookbook/
+
+RNGSEED="hex:00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
 
 ####################
 # common script init
-if ! test -r ../utils.sh; then
-	echo "run executable from its own directory: $0"; exit 1; fi
-. ../utils.sh
-Z="`detect_zenroom_path` `detect_zenroom_conf`"
+# if ! test -r ../utils.sh; then
+#	echo "run executable from its own directory: $0"; exit 1; fi
+# . ../utils.sh
+# Z="`detect_zenroom_path` `detect_zenroom_conf`"
+
+zexe() {
+	out="$1"
+	shift 1
+	>&2 echo "test: $out"
+	tee "$out" | zenroom -z $*
+}
+
+
 ####################
 
-cat <<EOF | zexe create_petition.zen -k ../zencode_credential/credentials.json -a ../zencode_credential/verifier.json > petition_request.json
+n=0
+
+let n=n+1
+
+echo "                                                "
+echo "------------------------------------------------"
+echo "  script:  $n            1     "
+echo " 												  "
+echo "------------------------------------------------"
+echo "   											  "
+
+
+cat <<EOF | zexe ../../docs/examples/zencode_cookbook/petitionRequest.zen -k ../../docs/examples/zencode_cookbook/credentialParticipantAggregatedCredential.json -a ../../docs/examples/zencode_cookbook/credentialIssuerVerifier.json | jq . | tee ../../docs/examples/zencode_cookbook/petitionRequested.json
 Scenario credential
 Scenario petition: create
     Given that I am known as 'Alice'
@@ -22,8 +46,17 @@ Scenario petition: create
     Then print all data
 EOF
 
+let n=n+1
 
-cat <<EOF | zexe approve_petition.zen -k petition_request.json -a ../zencode_credential/verifier.json > petition.json
+echo "                                                "
+echo "------------------------------------------------"
+echo "  script:  $n            2     "
+echo " 												  "
+echo "------------------------------------------------"
+echo "   											  "
+
+
+cat <<EOF | zexe ../../docs/examples/zencode_cookbook/petitionApproved.zen -k ../../docs/examples/zencode_cookbook/petitionRequested.json -a ../../docs/examples/zencode_cookbook/credentialIssuerVerifier.json | jq . | tee ../../docs/examples/zencode_cookbook/petitionApproved.json
 Scenario credential
 Scenario petition: approve
     Given that I have a 'verifier' inside 'MadHatter'
@@ -36,8 +69,17 @@ Scenario petition: approve
     and print the 'verifiers'
 EOF
 
+let n=n+1
 
-cat <<EOF | zexe sign_petition.zen -k ../zencode_credential/credentials.json -a ../zencode_credential/verifier.json > petition_signature.json
+echo "                                                "
+echo "------------------------------------------------"
+echo "  script:  $n            3     "
+echo " 												  "
+echo "------------------------------------------------"
+echo "   											  "
+
+
+cat <<EOF | zexe ../../docs/examples/zencode_cookbook/petitionSign.zen -k ../../docs/examples/zencode_cookbook/credentialParticipantAggregatedCredential.json -a ../../docs/examples/zencode_cookbook/credentialIssuerVerifier.json | jq . | tee ../../docs/examples/zencode_cookbook/petitionSignature.json
 Scenario credential
 Scenario petition: sign petition
     Given I am 'Alice'
@@ -49,7 +91,17 @@ Scenario petition: sign petition
     Then print the 'petition signature'
 EOF
 
-cat <<EOF | zexe aggregate_petition_signature.zen -k petition.json -a petition_signature.json > petition_increase.json
+let n=n+1
+
+echo "                                                "
+echo "------------------------------------------------"
+echo "  script:  $n              4   "
+echo " 												  "
+echo "------------------------------------------------"
+echo "   											  "
+
+
+cat <<EOF | zexe ../../docs/examples/zencode_cookbook/petitionAddSignature.zen -k ../../docs/examples/zencode_cookbook/petitionApproved.json -a ../../docs/examples/zencode_cookbook/petitionSignature.json | jq . | tee ../../docs/examples/zencode_cookbook/petitionAddSignature.json
 Scenario credential
 Scenario petition: aggregate signature
     Given that I have a valid 'petition signature'
@@ -62,7 +114,17 @@ Scenario petition: aggregate signature
     and print the 'verifiers'
 EOF
 
-cat <<EOF | zexe tally_petition.zen -k ../zencode_credential/credentials.json -a petition_increase.json > tally.json
+let n=n+1
+
+echo "                                                "
+echo "------------------------------------------------"
+echo "  script:  $n             5    "
+echo " 												  "
+echo "------------------------------------------------"
+echo "   											  "
+
+
+cat <<EOF | zexe ../../docs/examples/zencode_cookbook/petitionTally.zen -k ../../docs/examples/zencode_cookbook/credentialParticipantAggregatedCredential.json -a ../../docs/examples/zencode_cookbook/petitionAddSignature.json | jq . | tee ../../docs/examples/zencode_cookbook/petitionTally.json
 Scenario credential
 Scenario petition: tally
     Given that I am 'Alice'
@@ -72,7 +134,17 @@ Scenario petition: tally
     Then print all data
 EOF
 
-cat <<EOF | zexe count_petition.zen -k tally.json -a petition_increase.json
+let n=n+1
+
+echo "                                                "
+echo "------------------------------------------------"
+echo "  script:  $n             6    "
+echo " 												  "
+echo "------------------------------------------------"
+echo "   											  "
+
+
+cat <<EOF | zexe ../../docs/examples/zencode_cookbook/petitionCount.zen -k ../../docs/examples/zencode_cookbook/petitionTally.json -a ../../docs/examples/zencode_cookbook/petitionAddSignature.json
 Scenario credential
 Scenario petition: count
     Given that I have a valid 'petition'
@@ -80,6 +152,10 @@ Scenario petition: count
     When I count the petition results
     Then print the 'petition results' as 'number'
     and print the 'uid' as 'string' inside 'petition'
+	and print 'success!'
 EOF
 
-success
+echo "   "
+echo "---"
+echo "   "
+echo "The whole script was executed, success!"

@@ -1,0 +1,23 @@
+{
+  "petition": {
+    "list": [
+      "AyExtZfXSr/FaoQvH2F7copG9UPuKqtrA3Xs8iwWcyPfWQhSwifDNjgcTGHkc+tVdw=="
+    ],
+    "owner": "AkxuE0i/nx/imGIDEftEkUCuagp0408Ky22eAPh7d7E61OlVXBxiNvwhTVvM0mY/mA==",
+    "scores": {
+      "neg": {
+        "left": "AxBieza5OkfcLz3zJ+/u9/H6cug/SmWbTFCSGk3QTFUqq3MoaIGF3GvmI3WNSHvvCw==",
+        "right": "AwtXm1U67CuTzpoZvqAyOFTbIfMOc7QL8cZUyh+7FNbU9rkWbNHj5d3rF65GVrZPBA=="
+      },
+      "pos": {
+        "left": "AhBieza5OkfcLz3zJ+/u9/H6cug/SmWbTFCSGk3QTFUqq3MoaIGF3GvmI3WNSHvvCw==",
+        "right": "AwDEZnVEfC/PghrK9IxNe8XTZhTFwtpjpzHSfLVVI5M/i+T7xqxH9wqSoStSySS/LA=="
+      }
+    },
+    "uid": "cG9sbA=="
+  },
+  "verifiers": {
+    "alpha": "QtymIC4FKQ0LMhC9HazibNlsc6fve1mKlzQBfUsu+YmGGfq9yI8/gPtstp96C8DcPXnNDrPdCUkrKWSLsl1wq9WLeD71yyfUfflXEk1ztRsTnQ59A3qBwIRmy4CHRCbgS3DSW+deJnzaJ1qMzFbGBUcrkFNKB3aNNKa7BxoZ+WlbGgTYv7taUrlLxran7T8tFxmoNv9Ku4O8BpVUZlkSr/OfgehwgOpPCrIaMLL4ub3YEqEPfpqPTM4mexActEh7",
+    "beta": "RUYE411bbTLDAvEqWO4wGfP1ud6wuig7ws+5XwUOT0lrxgclDTmDFejfdPRiGY5DMY0N2c7towKWmJ3A9luaV/2Dqpo7OEmHnaaXUhpPRWBxbmRa7Cb/aZka8OiR8rV6EiHLPohhv3awUEijJg2Y8C0WuX8s0SBvhXTLhSxSbvEjXdEQaKOS8k7IJmqTBYiQS55Pbqsv5YV49PU62kSsviB522+d4G82GxE0lPz2NcByAr6VFnxeB/nuTDXq8fMu"
+  }
+}
