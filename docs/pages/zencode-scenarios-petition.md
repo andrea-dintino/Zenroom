@@ -20,8 +20,9 @@ The flow includes:
 
 The participant's credentials can be anonymous and each participant (or each credential possessor) can only sign the petition once. 
 
+The scripts and the output of this manual page are produced by this <a href="https://github.com/dyne/Zenroom/tree/master/test/zencode_petition/run.sh">flow script</a> that you should be able to download and run.
  
-## Create a the petition: creation and request
+## Create the petition: creation and request
  
 Any participant can create a petition. The requirements to become a participant are:
  
@@ -50,7 +51,7 @@ The result should look like this (*petitionRequest.json*):
 
 
 
-## Approve the petition request
+## Approve the requested petition
 
 In the second step, theorethically anybody can check if the petition created in the first step is valid and if the creator was allowed to create one. This script can be run be a central verifier or as a smart contract on a blockchain, along with a consensus algorythm.
 
@@ -84,20 +85,49 @@ The result *petitionSignature.json* should look like this:
 
 ## Aggregating the signatures: building the signature list 
 
-Once the petition has been signed by a participant
+Each time the petition has been signed, the signature needs to be added to the existing signature, using homomorphic cryptography, the so called *aggregation*. In this step, before performing the aggregation we will:
+ - Check the cryptographical validity of each produced *signature*
+ - Check that the same participant has not signed the petition already
 
+The script to *aggregate* signatures will be used each time a new signature is produced, it takes as input the latest signature (*petitionSignature.json*) as well as the file *petitionApproved.json*. The script looks like this:
 
-[](../_media/examples/zencode_cookbook/petitionAddSignature.zen ':include :type=code gherkin')
+[](../_media/examples/zencode_cookbook/petitionAggregateSignature.zen ':include :type=code gherkin')
 
-output
+The script will be used each time a new signature is produced and should keep modifying the file *petitionApproved.json*, which should look like:
 
-[](../_media/examples/zencode_cookbook/petitionAddSignature.json ':include :type=code json')
-
+[](../_media/examples/zencode_cookbook/petitionAggregatedSignature.json ':include :type=code json')
 
 
 
 
 ## Tally 
 
+The *tally* step effectively closes the petition: 
+ - Signatures can be **added** only **before** the tally
+ - Signatures can be **counted** only **after** the tally
+
+The script that performs the *tally* takes as input the aggregated signatures *petitionAggregatedSignature.json* and the *credentialParticipantAggregatedCredential.json* file containing the **credentials** of the petition creator, who is the only one who can tally the petition.
+
+The script to *tally* the petition looks like this:
+
+[](../_media/examples/zencode_cookbook/petitionTally.zen ':include :type=code gherkin')
+
+And the output, *petitionTally.json* should look like:
+
 [](../_media/examples/zencode_cookbook/petitionTally.json ':include :type=code json')
+
+
+## Count
+
+The script that counts the signatures can be executed by anyone, it requires no credentials and takes as input:
+ - the output of the tally script, the file *petitionTally.json*
+ - the aggregated signatures *petitionAggregatedSignature.json* 
+
+The script to count the signatures looks like this:
+
+[](../_media/examples/zencode_cookbook/petitionCount.zen ':include :type=code gherkin')
+
+And the output, *petitionCount.json* simply prints out the amount of the signatures (only one in this case) and the petition *uid*. It should look like:
+
+[](../_media/examples/zencode_cookbook/petitionCount.json ':include :type=code json')
 
