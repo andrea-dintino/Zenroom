@@ -77,6 +77,7 @@ Scenario petition: approve
     and I verify the new petition to be empty
     Then print the 'petition'
     and print the 'verifiers'
+	and print the 'uid' as 'string' inside 'petition' 
 EOF
 
 let n=n+1
