@@ -2,22 +2,24 @@
 
 # output path: ../../docs/examples/zencode_cookbook/
 
-RNGSEED="rngseed=hex:00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+RNGSEED="hex:00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
 
 ####################
 # common script init
-# if ! test -r ../utils.sh; then
-#	echo "run executable from its own directory: $0"; exit 1; fi
-# . ../utils.sh
-# Z="`detect_zenroom_path` `detect_zenroom_conf`"
-
-
-zexe() {
-	out="$1"
-	shift 1
-	>&2 echo "test: $out"
-	tee "$out" | zenroom -c $RNGSEED -z $*
-}
+if ! test -r ../utils.sh; then
+	echo "run executable from its own directory: $0"; exit 1; fi
+. ../utils.sh
+Z="`detect_zenroom_path` `detect_zenroom_conf`"
+####################
+# use zexe if you have zenroom in a system-wide path
+#
+# zexe() {
+#	out="$1"
+#	shift 1
+#	>&2 echo "test: $out"
+#	tee "$out" | zenroom -z $*
+# }
+####################
 
 
 
@@ -25,12 +27,31 @@ zexe() {
 
 # credential request
 
+n=0
+
+let n=n+1
+echo "                                                "
+echo "------------------------------------------------"
+echo " Script $n: Participant creates a keypair	  "
+echo " 												  "
+echo "------------------------------------------------"
+echo "                                                "
+
 cat << EOF | zexe ../../docs/examples/zencode_cookbook/credentialParticipantKeygen.zen | jq . | tee ../../docs/examples/zencode_cookbook/credentialParticipantKeypair.json
 Scenario credential: credential keygen
     Given that I am known as 'Alice'
     When I create the credential keypair
     Then print my 'credential keypair'
 EOF
+
+let n=n+2
+echo "                                                "
+echo "------------------------------------------------"
+echo " Script $n: Participant creates a credential request "
+echo " 												  "
+echo "------------------------------------------------"
+echo "                                                "
+
 
 cat << EOF | zexe ../../docs/examples/zencode_cookbook/credentialParticipantSignatureRequest.zen -k ../../docs/examples/zencode_cookbook/credentialParticipantKeypair.json | jq . | tee ../../docs/examples/zencode_cookbook/credentialParticipantSignatureRequest.json
 Scenario credential: create request
@@ -40,7 +61,16 @@ Scenario credential: create request
     Then print my 'credential request'
 EOF
 
+let n=n+3
+echo "                                                "
+echo "------------------------------------------------"
+echo " Script $n: create the keypair of the issuer    "
+echo " 												  "
+echo "------------------------------------------------"
+echo " "
+
 # credential issuance
+
 
 cat << EOF | zexe ../../docs/examples/zencode_cookbook/credentialIssuerKeygen.zen | jq . | tee ../../docs/examples/zencode_cookbook/credentialIssuerKeypair.json
 Scenario credential: issuer keygen
@@ -49,6 +79,15 @@ Scenario credential: issuer keygen
     Then print my 'issuer keypair'
 EOF
 
+let n=n+4
+echo "                                                "
+echo "------------------------------------------------"
+echo " Script $n: create the verifier of the issuer    "
+echo " 												  "
+echo "------------------------------------------------"
+echo " "
+
+
 cat << EOF | zexe ../../docs/examples/zencode_cookbook/credentialIssuerPublishVerifier.zen -k ../../docs/examples/zencode_cookbook/credentialIssuerKeypair.json | jq . | tee ../../docs/examples/zencode_cookbook/credentialIssuerVerifier.json
 Scenario credential: publish verifier
     Given that I am known as 'MadHatter'
@@ -56,7 +95,18 @@ Scenario credential: publish verifier
     Then print my 'verifier' from 'issuer keypair'
 EOF
 
+
+let n=n+5
+echo "                                                "
+echo "------------------------------------------------"
+echo " Script $n: the issuer signs the credential "
+echo " 												  "
+echo "------------------------------------------------"
+echo " "
+
 # credential signature
+
+
 
 cat << EOF | zexe ../../docs/examples/zencode_cookbook/credentialIssuerSignRequest.zen -a ../../docs/examples/zencode_cookbook/credentialParticipantSignatureRequest.json -k ../../docs/examples/zencode_cookbook/credentialIssuerKeypair.json | jq . | tee ../../docs/examples/zencode_cookbook/credentialIssuerSignedCredential.json
 Scenario credential: issuer sign
@@ -68,6 +118,14 @@ Scenario credential: issuer sign
     and print the 'verifier'
 EOF
 
+let n=n+6
+echo "                                                "
+echo "------------------------------------------------"
+echo " Script $n: the participant aggregates credential "
+echo " with its public key.					  "
+echo "------------------------------------------------"
+echo " "
+
 cat << EOF | zexe ../../docs/examples/zencode_cookbook/credentialParticipantAggregateCredential.zen -a ../../docs/examples/zencode_cookbook/credentialIssuerSignedCredential.json -k ../../docs/examples/zencode_cookbook/credentialParticipantKeypair.json | jq . | tee ../../docs/examples/zencode_cookbook/credentialParticipantAggregatedCredential.json
 Scenario credential: aggregate signature
     Given that I am known as 'Alice'
@@ -77,6 +135,14 @@ Scenario credential: aggregate signature
     Then print my 'credentials'
     and print my 'credential keypair'
 EOF
+
+let n=n+7
+echo "                                                "
+echo "------------------------------------------------"
+echo " Script $n: the participant creates the proof "
+echo " 												  "
+echo "------------------------------------------------"
+echo " "
 
 # zero-knowledge credential proof emission and verification
 
@@ -91,6 +157,13 @@ Scenario credential: create proof
     Then print the 'credential proof'
 EOF
 
+let n=n+8
+echo "                                                "
+echo "------------------------------------------------"
+echo " Script $n: anybody matches the proof with the verifier"
+echo " 												  "
+echo "------------------------------------------------"
+echo " "
 
 cat << EOF | zexe ../../docs/examples/zencode_cookbook/credentialAnyoneVerifyProof.zen -k ../../docs/examples/zencode_cookbook/credentialParticipantProof.json -a ../../docs/examples/zencode_cookbook/credentialIssuerVerifier.json
 Scenario credential: verify proof

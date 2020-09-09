@@ -1,5 +1,5 @@
 
-# Quickstart: My first random array
+# Quickstart: My first random array :id=quickstart
 
 One of Zenroom's strong points is the quality of the random generation (see [random test 1](https://github.com/dyne/Zenroom/blob/master/test/random_hamming_gnuplot.sh) and [random test 2](https://github.com/dyne/Zenroom/blob/master/test/random_rngtest_fips140-2.sh)), which happens to pass NIST's [tests](https://github.com/dyne/Zenroom/blob/master/test/nist/run.sh), so let's start with generate an array of random numbers and get it printed out. 
 
