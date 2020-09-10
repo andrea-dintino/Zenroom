@@ -92,15 +92,28 @@ The syntax highlight does not perform a syntax check, it's only there to help yo
 If you aren't yet logged in, you can see the button **Login**. After logging in, you will be able to see **Create API** button, by pressing it you are prompted with a list of your saves Zencode smart contracts, turned into APIs: 
 
 ![ApiroomShots](../_media/images/apiroom/Shot7LinkApi.png)
- 
+
+
+(to be continued)
+
+<!-- WIP 
+
+Here we'll see: 
+
+- Under ***Zencode smart contract*** you rea the name 
+
+
+
+
+
+
 ## TEMP
  
 We've done this already: let's start with create a file named *myLargeNestedObjectWhen.json*. This file contains everything we need for every part of this chapter and - along  with the *Given* part of the script, you can use this JSON to later make your own experiments with Zencode.
 
 [](../_media/examples/zencode_cookbook/myLargeNestedObjectWhen.json ':include :type=code json')
 
-dddd
-
 
 [](../_media/examples/zencode_cookbook/whenCompleteScriptGiven.zen ':include :type=code gherkin')
  
+-->
