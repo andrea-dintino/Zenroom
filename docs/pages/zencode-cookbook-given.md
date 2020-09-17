@@ -238,7 +238,7 @@ You would get this result, which is probably something you want to avoid:
 This last is the perfect example to introduce the *debug* operator.
 --> 
  
-## Loading dictionaries
+# Loading dictionaries
 
 Loading this dataset
 
@@ -253,7 +253,7 @@ with this script
 
 
  
-## The *debug* operator: a window into Zenroom's virtual machine
+# The *debug* operator: a window into Zenroom's virtual machine
 
 Looking back at the previous paragraph, you may be wondering what happens exactly inside Zenroom's virtual machine and - more important - how to peep into it. The *Debug* operator addresses this precise issue: it is a wildcard, meaning that it can be used in any phase of the process. You may for example place it at the end of the *Given* phase, in order to see what data has the virtual machine actually imported (using the same dataset): 
 

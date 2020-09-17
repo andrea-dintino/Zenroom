@@ -19,7 +19,7 @@ The *When* keyword introduces the phase of Zencode execution, where data can be 
  - Execute cryptography: this is where all the crypto-magic happens: creating keypairs, hashing points...
  - Comparisons: compare value of numbers, strings and complex objects.
  
-## First, let's load a JSON file
+## First, let's get a nice JSON 
  
 We've done this already: let's start with create a file named *myLargeNestedObjectWhen.json*. This file contains everything we need for every part of this chapter and - along  with the *Given* part of the script, you can use this JSON to later make your own experiments with Zencode.
 
@@ -27,7 +27,7 @@ We've done this already: let's start with create a file named *myLargeNestedObje
 
  
 
-## Loading the content of the JSON 
+### Loading the content of the JSON 
 
 Since the *When* phase contains many statements, we did split the scripts in four parts. The part of script that loads the JSON can be used for all the scripts below.
 
@@ -180,10 +180,6 @@ and do this computation:
 The output should look like this: 
 
 [](../_media/examples/zencode_cookbook/dictionariesComputationOutput.json ':include :type=code json')
-
-
-
-
 
 
 
