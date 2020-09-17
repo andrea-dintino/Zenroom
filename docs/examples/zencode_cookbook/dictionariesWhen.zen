@@ -1,17 +1,3 @@
-rule check version 1.0.0
-Scenario ecdh: sign the result
-
-# Import the Authority keypair
-Given that I am known as 'Authority'
-and I have my 'keypair'
-
-# Here we load the two dictionaries and import their data
-# and we also load a number named 'timestamp': there are also numbers with the same
-# inside the dictionaries, but those are referred to differently
-Given I have a 'string dictionary' named 'ABC-TransactionListSecondBatch'
-and I have a 'string dictionary' named 'ABC-TransactionListFirstBatch'
-and I have a 'number' named 'referenceTimestamp'
-
 # In this statement we find the last (most recent) transaction in the dictionary 
 # "ABC-TransactionListSecondBatch" by finding the element that contains
 # the number 'timestamp' with the highest value in that dictionary.
@@ -47,13 +33,13 @@ and I rename the 'result' to 'SumTransactionProductAmountAfterTheta'
 
 # create the entry for the new sum
 When I create the 'number dictionary'
-When I move 'SumTransactionValueAfterTheta' in 'number dictionary'
-When I move 'SumTransactionProductAmountAfterTheta' in 'number dictionary'
-and debug
-When I move 'TransactionValueSecondBatchAtTheta' in 'number dictionary'
-# When I move 'TransferredProductAmountSecondBatchAtTheta' in 'number dictionary'
-When I move 'referenceTimestamp' in 'number dictionary'
-# When I move 'Theta' in 'number dictionary'
+When I insert 'SumTransactionValueAfterTheta' in 'number dictionary'
+# 
+When I insert 'SumTransactionProductAmountAfterTheta' in 'number dictionary'
+When I insert 'TransactionValueSecondBatchAtTheta' in 'number dictionary'
+When I insert 'TransferredProductAmountSecondBatchAtTheta' in 'number dictionary'
+When I insert 'referenceTimestamp' in 'number dictionary'
+# When I insert 'Theta' in 'number dictionary'
 and I rename the 'number dictionary' to 'ABC-TransactionsAfterTheta'
 
 # sign the new entry
@@ -63,6 +49,4 @@ and I rename the 'signature' to 'ABC-TransactionsAfterTheta.signature'
 # print the result
 Then print the 'ABC-TransactionsAfterTheta'
 and print the 'ABC-TransactionsAfterTheta.signature'
-and print the 'Theta'
-and print the 'TransactionValueSecondBatchAtTheta'
-and print the 'TransferredProductAmountSecondBatchAtTheta'
+

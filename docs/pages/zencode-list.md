@@ -30,14 +30,17 @@ Rules are *optional*, they are used to define input and output formats of the sm
 
 ```txt
 rule input encoding [ url64 | base64 | hex | bin ]
+rule output encoding [ url64 | base64 | hex | bin ]
 rule input format [ json | cbor ]
+rule output format [ json | cbor ]
 ```
 
 For example, a valid config is: 
 
 ```gherkin
 rule input encoding hex
-rule output encoding hex
+rule output encoding string
+rule output format cbor
 ```
 
 A rule can be set also check that Zenroom is at a certain version: if the rule is not satisfied, Zenroom will stop. 

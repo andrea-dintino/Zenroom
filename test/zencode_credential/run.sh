@@ -171,7 +171,7 @@ Scenario credential: verify proof
     and I have a valid 'credential proof'
     When I aggregate the verifiers
     and I verify the credential proof
-    Then print 'Success'
+    Then print 'Success: Zenroom has verified that the credentials match the verifiers!' as 'string'
 EOF
 
 echo "   "

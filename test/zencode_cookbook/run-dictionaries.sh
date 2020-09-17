@@ -24,6 +24,10 @@ Z="`detect_zenroom_path` `detect_zenroom_conf`"
 
 n=0
 
+tmpGiven1=`mktemp`
+tmpWhen1=`mktemp`	
+tmpZen1="${tmpGiven1} ${tmpWhen1}"
+
 
 cat <<EOF > ../../docs/examples/zencode_cookbook/dictionariesIdentity_example.json
 {
@@ -50,7 +54,7 @@ cat <<EOF > ../../docs/examples/zencode_cookbook/dictionariesIdentity_example.js
 }
 EOF
 
-let n=n+1
+let n=1
 
 echo "                                                "
 echo "------------------------------------------------"
@@ -68,7 +72,7 @@ When I create the keypair
 Then print my data
 EOF
 
-let n=n+1
+let n=2
 
 echo "                                                "
 echo "------------------------------------------------"
@@ -86,7 +90,7 @@ and I have my 'keypair'
 Then print my 'public key' from 'keypair'
 EOF
 
-let n=n+1
+let n=3
 
 echo "                                                "
 echo "------------------------------------------------"
@@ -114,7 +118,7 @@ and print the 'HistoryOfTransactions.signature'
 EOF
 
 
-let n=n+1
+let n=4
 
 echo "                                                "
 echo "------------------------------------------------"
@@ -140,7 +144,7 @@ EOF
 
 
 
-let n=n+1
+let n=5
 
 echo "                                                "
 echo "------------------------------------------------"
@@ -158,9 +162,9 @@ and I rename the 'string dictionary' to 'ABC-TransactionsStatement'
 and I write number '108' in 'TransactionsConcluded'
 and I write string 'Transaction Control Dictionary' in 'nameOfDictionary'
 and I write number '21' in 'AverageAmountPerTransaction'
-and I move 'nameOfDictionary' in 'ABC-TransactionsStatement'
-and I move 'TransactionsConcluded' in 'ABC-TransactionsStatement'
-and I move 'AverageAmountPerTransaction' in 'ABC-TransactionsStatement'
+and I insert 'nameOfDictionary' in 'ABC-TransactionsStatement'
+and I insert 'TransactionsConcluded' in 'ABC-TransactionsStatement'
+and I insert 'AverageAmountPerTransaction' in 'ABC-TransactionsStatement'
 Then print the 'ABC-TransactionsStatement' 
 EOF
 
@@ -256,7 +260,7 @@ EOF
 
 
 
-let n=n+1
+let n=6
 
 echo "                                                "
 echo "------------------------------------------------"
@@ -265,9 +269,11 @@ echo " 												  "
 echo "------------------------------------------------"
 echo "   "
 
-cat <<EOF | zexe ../../docs/examples/zencode_cookbook/dictionariesFind_max_transactions.zen -a ../../docs/examples/zencode_cookbook/dictionariesBlockchain.json -k ../../docs/examples/zencode_cookbook/dictionariesIssuer_keypair.json | jq .
+
+
+cat <<EOF  > $tmpGiven1
 rule check version 1.0.0
-Scenario ecdh: sign the result
+Scenario ecdh: dictionary computation and signing 
 
 # Import the Authority keypair
 Given that I am known as 'Authority'
@@ -280,6 +286,12 @@ Given I have a 'string dictionary' named 'ABC-TransactionListSecondBatch'
 and I have a 'string dictionary' named 'ABC-TransactionListFirstBatch'
 and I have a 'number' named 'referenceTimestamp'
 
+
+EOF
+
+cat $tmpGiven1 > ../../docs/examples/zencode_cookbook/dictionariesGiven.zen
+
+cat <<EOF  > $tmpWhen1
 # In this statement we find the last (most recent) transaction in the dictionary 
 # "ABC-TransactionListSecondBatch" by finding the element that contains
 # the number 'timestamp' with the highest value in that dictionary.
@@ -315,13 +327,13 @@ and I rename the 'result' to 'SumTransactionProductAmountAfterTheta'
 
 # create the entry for the new sum
 When I create the 'number dictionary'
-When I move 'SumTransactionValueAfterTheta' in 'number dictionary'
-When I move 'SumTransactionProductAmountAfterTheta' in 'number dictionary'
-and debug
-When I move 'TransactionValueSecondBatchAtTheta' in 'number dictionary'
-When I move 'TransferredProductAmountSecondBatchAtTheta' in 'number dictionary'
-When I move 'referenceTimestamp' in 'number dictionary'
-# When I move 'Theta' in 'number dictionary'
+When I insert 'SumTransactionValueAfterTheta' in 'number dictionary'
+# 
+When I insert 'SumTransactionProductAmountAfterTheta' in 'number dictionary'
+When I insert 'TransactionValueSecondBatchAtTheta' in 'number dictionary'
+When I insert 'TransferredProductAmountSecondBatchAtTheta' in 'number dictionary'
+When I insert 'referenceTimestamp' in 'number dictionary'
+# When I insert 'Theta' in 'number dictionary'
 and I rename the 'number dictionary' to 'ABC-TransactionsAfterTheta'
 
 # sign the new entry
@@ -331,8 +343,13 @@ and I rename the 'signature' to 'ABC-TransactionsAfterTheta.signature'
 # print the result
 Then print the 'ABC-TransactionsAfterTheta'
 and print the 'ABC-TransactionsAfterTheta.signature'
-# and print the 'Theta'
-# and print the 'TransactionValueSecondBatchAtTheta'
-# and print the 'TransferredProductAmountSecondBatchAtTheta'
+
 EOF
 
+cat $tmpWhen1 > ../../docs/examples/zencode_cookbook/dictionariesWhen.zen
+
+cat $tmpZen1 | zexe ../../docs/examples/zencode_cookbook/dictionariesComputation.zen -z -a ../../docs/examples/zencode_cookbook/dictionariesBlockchain.json -k ../../docs/examples/zencode_cookbook/dictionariesIssuer_keypair.json | tee ../../docs/examples/zencode_cookbook/dictionariesComputationOutput.json | jq .
+
+#cat <<EOF | zexe ../../docs/examples/zencode_cookbook/dictionariesFind_max_transactions.zen -a ../../docs/examples/zencode_cookbook/dictionariesBlockchain.json -k ../../docs/examples/zencode_cookbook/dictionariesIssuer_keypair.json | jq .
+
+# cat <<EOF  > $tmpWhen1
