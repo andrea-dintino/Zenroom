@@ -64,7 +64,7 @@ echo "------------------------------------------------"
 echo "                                                "
 
 
-cat <<EOF | zexe ../../docs/examples/zencode_cookbook/dictionariesCreate_issuer_keypair.zen | tee ../../docs/examples/zencode_cookbook/dictionariesIssuer_keypair.json
+cat <<EOF | zexe ../../docs/examples/zencode_cookbook/dictionariesCreate_issuer_keypair.zen | tee ../../docs/examples/zencode_cookbook/dictionariesIssuer_keypair.json | jq
 rule check version 1.0.0
 Scenario 'ecdh': Create the keypair
 Given that I am known as 'Authority'
@@ -82,7 +82,7 @@ echo "------------------------------------------------"
 echo "                                                "
 
 
-cat <<EOF | zexe ../../docs/examples/zencode_cookbook/dictionariesPublish_issuer_pubkey.zen -k ../../docs/examples/zencode_cookbook/dictionariesIssuer_keypair.json | tee ../../docs/examples/zencode_cookbook/dictionariesIssuer_pubkey.json
+cat <<EOF | zexe ../../docs/examples/zencode_cookbook/dictionariesPublish_issuer_pubkey.zen -k ../../docs/examples/zencode_cookbook/dictionariesIssuer_keypair.json | tee ../../docs/examples/zencode_cookbook/dictionariesIssuer_pubkey.json | jq
 rule check version 1.0.0
 Scenario 'ecdh': Publish the public key
 Given that I am known as 'Authority'
@@ -170,7 +170,7 @@ EOF
 
 cat <<EOF > ../../docs/examples/zencode_cookbook/dictionariesBlockchain.json
 {
-   "ABC-TransactionListFirstBatch":{
+   "TransactionsBatchB":{
       "ABC-Transactions1Data":{
          "timestamp":1597573139,
          "TransactionValue":1000,
@@ -208,7 +208,7 @@ cat <<EOF > ../../docs/examples/zencode_cookbook/dictionariesBlockchain.json
          "TransferredProductAmount":500
       }
    },
-   "ABC-TransactionListSecondBatch":{
+   "TransactionsBatchA":{
       "ABC-Transactions1Data":{
          "timestamp":1597573040,
          "TransactionValue":1000,
@@ -252,7 +252,8 @@ cat <<EOF > ../../docs/examples/zencode_cookbook/dictionariesBlockchain.json
          "TransferredProductAmount":530
       }
    },
-   "referenceTimestamp":1597573330
+   "referenceTimestamp":1597573340,
+	"PricePerKG":3
 }
 EOF
 
@@ -275,48 +276,53 @@ cat <<EOF  > $tmpGiven1
 rule check version 1.0.0
 Scenario ecdh: dictionary computation and signing 
 
-# Import the Authority keypair
+# LOAD DICTIONARIES
+# Here we load the two dictionaries and import their data.
+# Later we also load some numbers, one of them name "PricePerKG" exists in the dictionary's root, 
+# as well as inside each element of the object: homonimy is not a problem in this case.
+Given that I have a 'string dictionary' named 'TransactionsBatchA'
+Given that I have a 'string dictionary' named 'TransactionsBatchB'
+
+# Loading other stuff here
+Given that I have a 'number' named 'referenceTimestamp'
+Given that I have a 'number' named 'PricePerKG'
 Given that I am known as 'Authority'
-and I have my 'keypair'
-
-# Here we load the two dictionaries and import their data
-# and we also load a number named 'timestamp': there are also numbers with the same
-# inside the dictionaries, but those are referred to differently
-Given I have a 'string dictionary' named 'ABC-TransactionListSecondBatch'
-and I have a 'string dictionary' named 'ABC-TransactionListFirstBatch'
-and I have a 'number' named 'referenceTimestamp'
-
+Given that I have my 'keypair'
 
 EOF
 
 cat $tmpGiven1 > ../../docs/examples/zencode_cookbook/dictionariesGiven.zen
 
 cat <<EOF  > $tmpWhen1
-# In this statement we find the last (most recent) transaction in the dictionary 
-# "ABC-TransactionListSecondBatch" by finding the element that contains
-# the number 'timestamp' with the highest value in that dictionary.
+
+# FIND MAX and MIN values in Dictionaries
+# All the dictionaries contain an internet date 'number' named 'timestamp' 
+# In this statement we find the most recent transaction in the dictionary "TransactionsBatchA" 
+# by finding the element that contains the number 'timestamp' with the highest value in that dictionary.
 # We also save the value of this 'timestamp' in an object that we call "Theta"
-When I find the max value 'timestamp' for dictionaries in 'ABC-TransactionListSecondBatch'
+When I find the max value 'timestamp' for dictionaries in 'TransactionsBatchA'
 and I rename the 'max value' to 'Theta'
 
+# CREATE SUM with condition
 # Here we compute the sum of the "TransactionValue" numbers, 
-# in the elements of the dictionary "ABC-TransactionListFirstBatch", 
+# in the elements of the dictionary "TransactionsBatchB", 
 # that have a 'timestamp' higher than "Theta". 
 # We also rename the sum into "sumOfTransactionsValueFirstBatchAfterTheta"
-When I create the sum value 'TransactionValue' for dictionaries in 'ABC-TransactionListFirstBatch' where 'timestamp' > 'Theta'
+When I create the sum value 'TransactionValue' for dictionaries in 'TransactionsBatchB' where 'timestamp' > 'Theta'
 and I rename the 'sum value' to 'sumOfTransactionsValueFirstBatchAfterTheta'
 
 # Here we do something similar to the statements above, but using the numbers
 # named "TransferredProductAmount" in the same dictionary 
 # We rename the sum to "sumOfTransactionsValueFirstBatchAfterTheta"
-When I create the sum value 'TransferredProductAmount' for dictionaries in 'ABC-TransactionListFirstBatch' where 'timestamp' > 'Theta'
+When I create the sum value 'TransferredProductAmount' for dictionaries in 'TransactionsBatchB' where 'timestamp' > 'Theta'
 and I rename the 'sum value' to 'TotalTransferredProductAmountFirstBatchAfterTheta'
 
+# FIND VALUE inside Dictionary's object
 # In the statements below we are looking for the transaction(s) happened at time "Theta", 
 # in both the dictionaries, and saving their "TransactionValue" into a new object (and renaming the object)
-When I find the 'TransactionValue' for dictionaries in 'ABC-TransactionListSecondBatch' where 'timestamp' = 'Theta'
+When I find the 'TransactionValue' for dictionaries in 'TransactionsBatchA' where 'timestamp' = 'Theta'
 and I rename the 'TransactionValue' to 'TransactionValueSecondBatchAtTheta'
-When I find the 'TransferredProductAmount' for dictionaries in 'ABC-TransactionListSecondBatch' where 'timestamp' = 'Theta'
+When I find the 'TransferredProductAmount' for dictionaries in 'TransactionsBatchA' where 'timestamp' = 'Theta'
 and I rename the 'TransferredProductAmount' to 'TransferredProductAmountSecondBatchAtTheta'
 
 # sum the last with the new aggregated values from recent transactions
@@ -325,10 +331,20 @@ and I rename the 'result' to 'SumTransactionValueAfterTheta'
 When I create the result of 'TotalTransferredProductAmountFirstBatchAfterTheta' + 'TransferredProductAmountSecondBatchAtTheta'
 and I rename the 'result' to 'SumTransactionProductAmountAfterTheta'
 
+# ROTTO
+#
+# The value of 'referenceTimestamp' is not found into 
+#  The content of element 'referenceTimestamp' is not found inside: TransactionsBatchA
+# ROTTO: When the 'timestamp' is found in 'TransactionsBatchA'
+# Works: When the 'referenceTimestamp' is found in 'TransactionsBatchA'
+# ROTTO: When the 'PricePerKG' is found in 'TransactionsBatchA'
+
+# CREATE Dictionary
+# INSERT in Dictionary
+
 # create the entry for the new sum
 When I create the 'number dictionary'
-When I insert 'SumTransactionValueAfterTheta' in 'number dictionary'
-# 
+When I insert 'SumTransactionValueAfterTheta' in 'number dictionary' 
 When I insert 'SumTransactionProductAmountAfterTheta' in 'number dictionary'
 When I insert 'TransactionValueSecondBatchAtTheta' in 'number dictionary'
 When I insert 'TransferredProductAmountSecondBatchAtTheta' in 'number dictionary'
@@ -336,6 +352,7 @@ When I insert 'referenceTimestamp' in 'number dictionary'
 # When I insert 'Theta' in 'number dictionary'
 and I rename the 'number dictionary' to 'ABC-TransactionsAfterTheta'
 
+# ECDSA SIGNATURE of Dictionaries
 # sign the new entry
 When I create the signature of 'ABC-TransactionsAfterTheta'
 and I rename the 'signature' to 'ABC-TransactionsAfterTheta.signature'

@@ -95,6 +95,59 @@ In the second group we gathered the *When* statements that can create new object
 
 The output should look like <a href="../_media/examples/zencode_cookbook/whenCompleteOutputPart2.json" download>whenCompleteOutputPart2.json</a>.
 
+## The statement "Create the (name of schema)"
+
+By now we have been using the statement "Create" a bit, let's get a better look at it. 
+
+The statement *Create the* works only to create **schemas**, which are particular objects, whose names and structures are predefined.
+
+in *Zencode*, *the* is a keyword indicating that a **schema** is about to be created. The structure of the **schema** created by the statement, matches the word(s) following the keyword "the", and the name of object created will also be the same.
+
+A general version of the statement looks like this: 
+
+```gherkin
+When I create the <name of the schema>
+``` 
+
+Some schemas need no **scenario** to work, and those are all listed on this page. Other schemas are typically described in the manual pages of the scenarios they belong to. Some examples are: 
+
+A statement we have use extensively already from the scenario 'ecdh'
+```gherkin
+When I create the keypair
+``` 
+
+As you probably know by now, this statement outputs something looking like this: 
+
+```json
+{    "keypair": {
+      "private_key": "AxLMXkey00i2BD675vpMQ8WhP/CwEfmdRr+BtpuJ2rM=",
+      "public_key": "BDDuiMyAjIu8tE3pGSccJcwLYFGWvo3zUAyazLgTlZyEYOePoj+/UnpMwV8liM8mDobgd/2ydKhS5kLiuOOW6xw="
+    }
+  }
+``` 
+
+
+Another examples of the statement, from the scenario 'credential':
+
+```gherkin
+When I create the credential keypair
+``` 
+
+An example, from the scenario 'petition':
+
+```gherkin
+When I create the petition signature 'nameOfThePetitionIWantToSign'
+``` 
+
+And an exotic version of the statement is the one used to transform the formatting of an object to CBOR (if originally in JSON) or to JSON (if originally in CBOR): 
+
+```gherkin
+When I create the cbor of 'myJsonObject'
+When I create the json of 'myCborObject'
+``` 
+
+We're sparing you the full list of **schemas** that you can create, but the best place to see a full and updated list is <a href="https://apiroom.net">https://apiroom.net</a>. 
+
 
 ## Basic cryptography: hashing
 
@@ -154,9 +207,11 @@ The output should look like
 
 ## Operations with dictionaries
 
-The last group includes all the statements that are exclusive to ***dictionary*** objects 
+The last group includes all the statements that are exclusive to ***dictionary*** objects. A dictionary is a complex object made of an array of complex objects, where all the objects in the array have the same structure. You can use dictionaries for examples with a list of transactions, a list of accounts, a list of data entries.
 
 ***Compare if objects*** (strings, numbers or arrays) are equal.
+
+***Find maximum and minimum values*** among an array different 
 
 ***See if a number is more, less or equal*** to another. 
 

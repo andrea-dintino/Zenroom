@@ -240,16 +240,55 @@ This last is the perfect example to introduce the *debug* operator.
  
 # Loading dictionaries
 
-Loading this dataset
+The last group includes all the statements that are exclusive to ***dictionaries***. A dictionary is an ***array of elements***, where elements are complex objects which all have the same internal structure. You can use dictionaries, for example, to deal with a list of transactions, a list of accounts, a list of data entries, or any array of objects that share the same structure
+
+A dictionary will have a structure like this: 
+
+
+```json
+{
+	"Beatles" : {
+		"John": {
+			"yearOfBirth" : 1940,
+			"instrumentPlayed" : "voice",
+			"wearsGlasses":1
+		},
+		"Paul":{
+			"yearOfBirth":1942,
+			"instrumentPlayed":"bass",
+			"wearsGlasses":0
+		},
+		"Ringo":{
+			"yearOfBirth":1940,
+			"instrumentPlayed":"guitar",
+			"wearsGlasses":0
+		},
+		"George":{
+			"yearOfBirth":1943,
+			"instrumentPlayed":"drums",
+			"wearsGlasses":0
+		}
+	}
+}
+```
+
+Dictionaries are named and loaded in the same fashion as arrays, so in order to load a dictionary you will write something like:
+
+```gherkin
+Given I have a 'string dictionary' named 'myCustomerAccounts' 
+```
+
+So let's try to load a real dataset that contains two dictionaries, dummy datasets representing transactions, the first named *ABC-TransactionListFirstBatch* and the second *ABC-TransactionListSecondBatch*, which we'll save in the file **dictionariesBlockchain.json**:
 
 [](../_media/examples/zencode_cookbook/dictionariesBlockchain.json ':include :type=code json')
 
 
-
-
-with this script
+In order to load that the two dictionaries we'll use this script:
 
 [](../_media/examples/zencode_cookbook/dictionariesGiven.zen ':include :type=code gherkin')
+
+Note that along with the dictionaries, we are also loadin two ***numbers*** where the one named *PricePerKG* exists as well as inside each element of the object: this homonimy is not a problem in this case. 
+You can use the *debug* statement everytime you are not sure about what is being loaded and what note, just read on to find out how.
 
 
  

@@ -1,5 +1,5 @@
 {
-   "ABC-TransactionListFirstBatch":{
+   "TransactionsBatchB":{
       "ABC-Transactions1Data":{
          "timestamp":1597573139,
          "TransactionValue":1000,
@@ -37,7 +37,7 @@
          "TransferredProductAmount":500
       }
    },
-   "ABC-TransactionListSecondBatch":{
+   "TransactionsBatchA":{
       "ABC-Transactions1Data":{
          "timestamp":1597573040,
          "TransactionValue":1000,
@@ -81,5 +81,6 @@
          "TransferredProductAmount":530
       }
    },
-   "referenceTimestamp":1597573330
+   "referenceTimestamp":1597573340,
+	"PricePerKG":3
 }
